@@ -110,6 +110,138 @@ CREATE TABLE Projects (
  select * from Employee where department = "hr";
  select * from employee order by department;
 
+CREATE DATABASE company;
+USE company; 
+CREATE TABLE Employee (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Age INT
+);
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Age INT
+);
+CREATE TABLE proj (
+    Project_ID INT PRIMARY KEY,
+    Project_Name VARCHAR(100) NOT NULL,
+    Employee_ID INT,
+-- Defining Foreign Key and Cascading Behavior 
+FOREIGN KEY (Employee_ID) 
+REFERENCES Employees(ID) 
+ON UPDATE CASCADE 
+ON DELETE CASCADE );
 
+INSERT INTO Employee (ID, Name, Age) VALUES
+(101, 'Alice Smith', 30),
+(102, 'Bob Jones', 28);
+INSERT INTO projects (Project_ID, Project_Name, Employee_ID) VALUES
+(1, 'Website Redesign', 101),
+(2, 'Cloud Migration', 101),
+(3, 'Mobile App', 102);
+UPDATE Employee
+SET ID = 999
+WHERE ID = 101;
+DELETE FROM Employee
+WHERE ID = 999;
+select * from employee;
+show tables;
+alter table accounts
+Add constraint FK_Accounts_customers
+Foreign key (AccountID)
+References Customers(CustomerID);
+alter table accounts
+Add customerID INT;
+Alter table accounts
+Add constraint FK_Accounts
+foreign key (customerID)
+references Customers(CustomerID);
 
-
+select * from customers;
+select * from employee;
+select fullname,salary from employee;
+select * from employee where Department="IT" and age=28;
+select * from employee where salary=35000;
+use bankingdb;
+select * from employee where age !=28;
+select * from employee where age in (25,28);
+select * from employee where salary in (75000,35000);
+select * from employee where salary between 35000 and 75000;
+select * from employee where salary between 50000 and 75000;
+select * from employee where age between 25 and 27;
+select * from employee where employeeid in (1002,1007,1010);
+select * from employee where fullname like "M%";
+select * from employee where fullname like "%n";
+select * from employee where fullname like "__m%";
+select * from employee where fullname like "%l%";
+select * from employee order by age;
+select * from employe0e order by age desc;
+select distinct Department from employee;
+select * from employee limit 5;
+select * from employee order by employeeid desc  limit 5; 
+select * from employee order by employeeid limit 2,4;
+select * from employee order by employeeid limit 4,2;
+select * from employee order by employeeid limit 5 offset 2;
+select * from employee order by fullname;
+select * from employee order by salary desc limit 5;
+select distinct Department from employee;
+select * from projects;
+INSERT INTO Projects VALUES 
+'Develop Ecommerse Website from scratch', 1003, NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY)),
+'WordPress Website for our company', 1002, NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY)),
+'Manage our Company Servers', 1007, NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY)),
+'Hosting account is not working', 1009, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY)),
+'MySQL database from my desktop application', 1010, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY)),
+'Develop new WordPress plugin for my business website', NULL, NOW(), DATE_ADD(NOW(), 
+INTERVAL 10 DAY)),
+'Migrate web application and database to new server', NULL, NOW(), DATE_ADD(NOW(), INTERVAL 5 
+DAY)),
+'Android Application development', 1004, NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY)),
+'Hosting account is not working', 1001, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY)),
+'MySQL database from my desktop application', 1008, NOW(), DATE_ADD(NOW(), INTERVAL 15 
+DAY)),
+'Develop new WordPress plugin for my business website', NULL, NOW(), DATE_ADD(NOW(), 
+INTERVAL 10 DAY));
+CREATE TABLE Projects (
+ ProjectId INT PRIMARY KEY AUTO_INCREMENT,
+ ProjectName VARCHAR(200) NOT NULL,
+ EmployeeId INT,
+ StartDate DATETIME,
+ EndDate DATETIME
+);
+INSERT INTO Projects VALUES 
+('Develop Ecommerse Website from scratch', 1003, NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY)),
+('WordPress Website for our company', 1002, NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY)),
+('Manage our Company Servers', 1007, NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY)),
+('Hosting account is not working', 1009, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY)),
+('MySQL database from my desktop application', 1010, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY)),
+('Develop new WordPress plugin for my business website', NULL, NOW(), DATE_ADD(NOW(), 
+INTERVAL 10 DAY)),
+('Migrate web application and database to new server', NULL, NOW(), DATE_ADD(NOW(), INTERVAL 5 
+DAY)),
+('Android Application development', 1004, NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY)),
+('Hosting account is not working', 1001, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY)),
+('MySQL database from my desktop application', 1008, NOW(), DATE_ADD(NOW(), INTERVAL 15 
+DAY)),
+('Develop new WordPress plugin for my business website', NULL, NOW(), DATE_ADD(NOW(), 
+INTERVAL 10 DAY));
+INSERT INTO Projects (ProjectName, EmployeeID, StartDate, EndDate)
+VALUES
+('Develop Ecommerse Website from scratch', 1003, NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY)),
+('WordPress Website for our company', 1002, NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY)),
+('Manage our Company Servers', 1007, NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY)),
+('Hosting account is not working', 1009, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY)),
+('MySQL database from my desktop application', 1010, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY)),
+('Develop new WordPress plugin for my business website', NULL, NOW(), DATE_ADD(NOW(), INTERVAL 10 DAY)),
+('Migrate web application and database to new server', NULL, NOW(), DATE_ADD(NOW(), INTERVAL 5 DAY)),
+('Android Application development', 1004, NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY)),
+('Hosting account is not working', 1001, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY)),
+('MySQL database from my desktop application', 1008, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY)),
+('Develop new WordPress plugin for my business website', NULL, NOW(), DATE_ADD(NOW(), INTERVAL 10 DAY));
+select * from projects;
+select fullname, salary,
+case
+when salary>=50000 then "Highly paid"
+else "Low paid"
+end as "Remarks"
+from employee;
