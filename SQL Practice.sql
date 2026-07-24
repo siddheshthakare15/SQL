@@ -245,3 +245,26 @@ when salary>=50000 then "Highly paid"
 else "Low paid"
 end as "Remarks"
 from employee;
+-- Group by --
+select department, count(department) from employee group by department; 
+select department, count(department) from employee where gender="Male" group by department;
+select department, count(department) from employee where salary>=50000 group by department;
+-- Group By HAVING Clause --
+select department, sum(salary) from employee group by department having sum(Salary)>150000;
+Select gender, Count(Gender) from employee group by gender;
+Select gender, count(*) from employee group by gender having sum(salary)>=250000;
+select fullname , gender, salary from employee where salary>=50000;
+select EmployeeID, Fullname, department, salary,
+AVG(salary) over (PARTITION BY Department) AS DepartmentAverageSalary from employee order by department, salary desc;
+select EmployeeID, Gender, Age,
+Avg(Age) over (Partition by gender) as Averageagesalary from employee order by gender, salary desc;
+-- Row Number --
+Select EmployeeID, Fullname, Department,
+Row_number() over (Partition by department) as RANKIDDEPARTMENT From employee order by Department;
+--  Ranking Window Functions --
+select employeeID, fullname, department, salary, 
+rank() over (order by salary) as overallsalaryrank from employee order by overallsalaryrank;
+select employeeID, fullname, department, salary, 
+dense_rank() over (order by salary) as overallsalaryrank from employee order by overallsalaryrank;
+
+
