@@ -266,5 +266,48 @@ select employeeID, fullname, department, salary,
 rank() over (order by salary) as overallsalaryrank from employee order by overallsalaryrank;
 select employeeID, fullname, department, salary, 
 dense_rank() over (order by salary) as overallsalaryrank from employee order by overallsalaryrank;
+-- String Fumctions --
+-- Concat --
+select * from employee;
+select concat("Sacchin", "", "Tendulkar") as Name;
+select  concat(FullName, "-", Department) as Detail from employee;
+select lower(fullname) from employee;
+select upper(fullname) from employee;
 
-
+select replace("Hi ! How arre you !", "Hi","Bye");
+select fullname, replace(fullname,"Mohanty","Patil") as new from employee;
+select fullname, replace(fullname,"Smith","Patil") as new from employee;
+select fullname, replace(fullname,"Doe","Thakare") as new from employee;
+select fullname, Reverse(fullname) as Reversed from employee;
+select fullname, length(fullname) as char_length from employee;
+select substring('GOOD MORNING', 1, 3) AS EXTRACTSTRING;
+select substring('GOOD MORNING', 3, 3) AS EXTRACTSTRING;
+select substring('GOOD MORNING', 3, 5) AS EXTRACTSTRING,LENGTH(SUBSTRING ('GOOD MORNING', 3, 5)) AS CLK;
+sELECT SUBSTRING(FULLNAME, 1, 5) AS CLIPPED FROM EMPLOYEE;
+ Create table CSV_Table 
+ (name VARCHAR(100),
+ modified VARCHAR(100));
+ INSERT INTO CSV_Table Values
+ ("AMAN","AMAN  "),
+ ("SUMAN","  SUMAN"),
+ ("KIRAN","  KIRAN"),
+ ("DINESH","DINESH  ");
+ select te.*,length(modified) as OG_Length,
+ rtrim(modified),length(rtrim(modified)) as lN from CSV_Table as te;
+ select te.*,length(modified) as OG_Length,
+ trim(modified),length(ltrim(modified)) as lN from CSV_Table as te;
+ select ABS(90);
+ select MOD(5,2);
+ select floor(42.2);
+ select ceiling(42.2);
+ select truncate(123.4567,-2);
+ select power(2,8);
+ select sqrt(255);
+ select curdate();
+ select NOW();
+ select sysdate();
+ select last_day(NOW());
+ select last_day("2026-03-2");
+ SELECT DATEDIFF("2004-06-15",NOW());
+ SELECT MONTH(NOW());
+ SELECT year(now());
