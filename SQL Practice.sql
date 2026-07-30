@@ -311,3 +311,126 @@ sELECT SUBSTRING(FULLNAME, 1, 5) AS CLIPPED FROM EMPLOYEE;
  SELECT DATEDIFF("2004-06-15",NOW());
  SELECT MONTH(NOW());
  SELECT year(now());
+ select avg(salary) as avg_salary
+ from employee
+ where gender = 'female';
+ select count(fullname) as count_fullname
+ from employee;
+ select count(*) 
+ from employee
+ where gender = 'female';
+ select max(salary)
+ from employee;
+ select min(salary)
+ from employee where department = 'IT';
+ select sum(salary)
+ from employee;
+ select sum(salary)
+ from employee where department ='HR';
+ select * from projects;
+ select projectname, datediff(enddate,startdate) as Duration_in_Days from projects;
+ select date_format(now(),"%a");
+ select date_format ("2026-07-27","%b-%a") as weekdays;
+ select date_format ("2026-07-27","%d %b-%a") as weekdays;
+ select date_format ("2026-07-27","%j...%d %M-%a") as weekdays;
+ select date_format(curdate(),"%p");
+ select date_format(sysdate(),"%p");
+ select date_format(enddate, "%D %M %Y %W"),
+ date_format(startdate, "%D %M %Y %W"),
+ datediff(enddate, startdate) as duration from projects where datediff(enddate,startdate)>10;
+ select round(2.4);
+ select *, if(age>=27,"Senior","Junior") as status from employee;
+ select *, if(salary>=50000, "high paid","low paid") as status from employee;
+ select ifnull(EmployeeId, "NO ID PRESENT") as checkl from projects;
+select greatest(23,24,45,67,55) as greates_number;
+select least(23,24,45,67,55) as greates_number;
+select fullname, nullif(fullname,"John Doe") from employee;
+select fullname, department, salary,
+sum(salary) over( partition by department) as departmenttotalsalary
+from employee;
+
+
+SELECT
+    EmployeeId,
+    FullName,
+    Department,
+    Salary,
+    SUM(Salary) OVER (PARTITION BY Department) AS DepartmentTotalSalary
+FROM
+    Employee
+ORDER BY
+    Department, Salary DESC;
+    SELECT
+    EmployeeId,
+    FullName,
+    Department,
+    Salary,
+    AVG(Salary) OVER (PARTITION BY Department) AS DepartmentAverageSalary
+FROM
+    Employee
+ORDER BY
+    Department, Salary DESC;
+    SELECT
+    EmployeeId,
+    FullName,
+    Department,
+    Salary,
+    ROW_NUMBER() OVER (PARTITION BY Department ORDER BY Salary DESC) AS RankInDepartment
+FROM
+    Employee
+ORDER BY
+    Department, RankInDepartment;
+    SELECT
+    EmployeeId,
+    FullName,
+    Department,
+    Salary,
+    RANK() OVER (ORDER BY Salary DESC) AS OverallSalaryRank
+FROM
+    Employee
+ORDER BY
+    OverallSalaryRank, EmployeeId;
+    SELECT
+    EmployeeId,
+    FullName,
+    Department,
+    Salary,
+    DENSE_RANK() OVER (ORDER BY Salary DESC) AS OverallSalaryDenseRank
+FROM
+    Employee
+ORDER BY
+    OverallSalaryDenseRank, EmployeeId;
+    SELECT
+    EmployeeId,
+    FullName,
+    Department,
+    Salary,
+    NTILE(4) OVER (ORDER BY Salary DESC) AS SalaryQuartile
+FROM
+    Employee
+ORDER BY
+    SalaryQuartile, Salary DESC;
+    SELECT
+    EmployeeId,
+    FullName,
+    Department,
+    Age,
+    Salary,
+    LAG(Salary, 1, 0) OVER (PARTITION BY Department ORDER BY Age ASC) AS PreviousEmployeeSalaryByAge
+FROM
+    Employee
+ORDER BY
+    Department, Age;
+    SELECT
+    EmployeeId,
+    FullName,
+    Department,
+    Age,
+    Salary,
+    LEAD(Salary, 1, 0) OVER (PARTITION BY Department ORDER BY Age ASC) AS NextEmployeeSalaryByAge
+FROM
+    Employee
+ORDER BY
+    Department, Age;
+    
+    
