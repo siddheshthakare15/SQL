@@ -558,7 +558,7 @@ on employee.EmployeeID=Projects.EmployeeID;
 select employee.EmployeeID,Fullname,Projectname
 from Employee left join Projects
 on employee.EmployeeID=Projects.EmployeeID;
-select projects.EmployeeID,Fullname,Projectname
+select projects.EmployeeID,Fullname,Projectnameu
 from Employee left join Projects
 on employee.EmployeeID=Projects.EmployeeID 
 where employee.EmployeeID>1004;
@@ -566,3 +566,46 @@ select projects.EmployeeID,Fullname,Projectname
 from Employee left join Projects
 on employee.EmployeeID=Projects.EmployeeID 
 where employee.EmployeeID>1004 and fullname like "P%";
+
+
+use company;
+use bankingDB;
+select employee .employeeID, employee.fullname, projects.projectID, projects.Projectname, datediff(enddate, startdate)
+from employee left join projects
+On employee.employeeID=projects.employeeID;
+select employee .employeeID, employee.fullname, projects.projectID, projects.Projectname, datediff(enddate, startdate)
+from employee left join projects
+On employee.employeeID=projects.employeeID
+where projects.projectname is null;
+select employee.employeeID, employee.fullname, projects.projectID, projects.Projectname, address.state, datediff(enddate, startdate), address.state
+from employee left join projects
+On employee.employeeID=projects.employeeID
+left join Address
+On employee.employeeid=address.employeeid; 
+
+select employee.employeeID, employee.fullname, projects.projectID, projects.Projectname, datediff(enddate, startdate)
+from employee left join projects
+On employee.employeeID=projects.employeeID
+left join Address
+On employee.employeeid=projects.employeeid; 
+select employee .employeeID, employee.fullname, projects.Projectname, datediff(enddate, startdate)
+from employee left join projects
+On employee.employeeID=projects.employeeID
+union all
+select  projects.employeeID, employee.fullname, projects.Projectname, datediff(enddate, startdate)
+from employee right join projects
+On employee.employeeID=projects.employeeID;
+
+update employee set salary= salary+10000;
+select * from employee;  
+
+select * from employee
+cross join address;
+-- view --
+ use bankingDB;
+Create View My_View as select employee.employeeID, employee.fullname, projects.projectID, projects.Projectname, datediff(enddate, startdate)
+from employee left join projects
+On employee.employeeID=projects.employeeID
+left join Address
+On employee.employeeid=projects.employeeid; 
+select * from my_view; 
